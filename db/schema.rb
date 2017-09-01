@@ -12,15 +12,15 @@
 
 ActiveRecord::Schema.define(version: 20170729171732) do
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name", null: false
     t.string "title", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "subjects", force: :cascade do |t|
-    t.integer "category_id"
+  create_table "subjects", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "category_id"
     t.string "name", null: false
     t.string "title", null: false
     t.string "abstract", null: false
@@ -30,4 +30,5 @@ ActiveRecord::Schema.define(version: 20170729171732) do
     t.index ["category_id"], name: "index_subjects_on_category_id"
   end
 
+  add_foreign_key "subjects", "categories"
 end
